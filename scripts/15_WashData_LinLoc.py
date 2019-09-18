@@ -7,6 +7,8 @@ import subprocess
 
 condition = sys.argv[1]
 
+subprocess.call(['mkdir', '/home/claudio/Comp_Genetics/{0}_Results/'.format(condition)])
+
 all_phenotypes = pd.read_csv('/home/claudio/Comp_Genetics/results/bugwas_phenotypes.tsv', sep = '\t')
 genotypes = pd.read_csv('/home/claudio/Comp_Genetics/raw_data/genotypes_noref_formatted.tsv', sep = '\t')
 
@@ -24,9 +26,16 @@ nomatch_samples = [sample for sample in ini_samples_phenotypes if sample not in 
 nomatch_samples = list(dict.fromkeys(nomatch_samples))
     
 # Get rid of duplicates and nomatching samples on the phenotypes
+
 phenotypes_1 = subset_phenotypes.drop_duplicates(subset=['ID'])
 phenotypes_2 = phenotypes_1[~phenotypes_1['ID'].isin(nomatch_samples) & phenotypes_1['ID'].isin(ini_samples_phenotypes)] ## ~ = negation
-phenotypes_2['pheno'] = phenotypes_2['pheno'].map(lambda x: x.split('_')[1])
+phenotypes_2['pheno'] = phenotypes_2['pheno'].map(lambda x: float(x.split('_')[1]))
+def norm(x): 
+    ''' function that normalizes phenotype scores between 0 and 1 '''
+    
+    y = (x - phenotypes_2['pheno'].min())/(phenotypes_2['pheno'].max() - phenotypes_2['pheno'].min())
+    return y
+phenotypes_2['pheno'] = phenotypes_2['pheno'].apply(norm)
 phenotypes_2.to_csv('/home/claudio/Comp_Genetics/{0}_Results/{0}_Phenotypes.tsv'.format(condition), sep = '\t', index = False)    
 # Get sample list to filter
 samples_phenotypes = list(phenotypes_2.iloc[:,0])
@@ -50,16 +59,16 @@ subset_genotypes.to_csv('/home/claudio/Comp_Genetics/{0}_Results/{0}_Genotypes.t
 
 
 with open('/home/claudio/Comp_Genetics/{0}_Results/{0}_snps.vcf'.format(condition), 'w') as bcffile:
-    subprocess.call(['bcftools', 'view', '-S', '/home/claudio/Comp_Genetics/{0}_Results/{0}_Filter_Tree.tsv'.format(condition), '/home/claudio/Comp_Genetics/input/snps.vcf.gz'])
+    subprocess.call(['bcftools', 'view', '-S', '/home/claudio/Comp_Genetics/{0}_Results/{0}_Filter_Tree.tsv'.format(condition), '/home/claudio/Comp_Genetics/input/snps.vcf.gz'], stdout = bcffile)
 
 with open('/home/claudio/Comp_Genetics/{0}_Results/{0}_snps.vcf.gz'.format(condition), 'w') as snpsfile:
-    subprocess.call(['bgzip', '-c', '/home/claudio/Comp_Genetics/{0}_Results/{0}_snps.vcf'.format(condition)])
+    subprocess.call(['bgzip', '-c', '/home/claudio/Comp_Genetics/{0}_Results/{0}_snps.vcf'.format(condition)], stdout = snpsfile)
 subprocess.call(['/home/claudio/Comp_Genetics/tassel-5-standalone/run_pipeline.pl', '-Xms512m', '-Xmx10g', '-importGuess', '/home/claudio/Comp_Genetics/{0}_Results/{0}_snps.vcf.gz'.format(condition), '-CreateTreePlugin', '-clusteringMethod', 'Neighbor_Joining', '-endPlugin', '-export', 'hello_there', '-exportType', 'SqrMatrix'])
 subprocess.call(['rm', '/home/claudio/Comp_Genetics/scripts/hello_there1.txt'])
 subprocess.call(['mv', '/home/claudio/Comp_Genetics/scripts/hello_there2.txt', '/home/claudio/Comp_Genetics/{0}_Results/{0}_Distance_Matrix.tsv'.format(condition)])
 
-with open('/home/claudio/Comp_Genetics/{0}_Results/{0}_Distance_Matrix_2.tsv'.format(condition), 'rw') as tsvfile:
-    subprocess.call(['tail', '-n', '+6', '/home/claudio/Comp_Genetics/{0}_Results/{0}_Distance_Matrix.tsv'.format(condition)])
+with open('/home/claudio/Comp_Genetics/{0}_Results/{0}_Distance_Matrix_2.tsv'.format(condition), 'w') as tsvfile:
+    subprocess.call(['tail', '-n', '+6', '/home/claudio/Comp_Genetics/{0}_Results/{0}_Distance_Matrix.tsv'.format(condition)], stdout = tsvfile)
 subprocess.call(['mv', '/home/claudio/Comp_Genetics/{0}_Results/{0}_Distance_Matrix_2.tsv'.format(condition), '/home/claudio/Comp_Genetics/{0}_Results/{0}_Distance_Matrix.tsv'.format(condition)])
 
 distance_matrix = pd.read_csv('/home/claudio/Comp_Genetics/{0}_Results/{0}_Distance_Matrix.tsv'.format(condition), sep = '\t', header = None)
@@ -71,3 +80,6 @@ distance_matrix.to_csv('/home/claudio/Comp_Genetics/{0}_Results/{0}_Distance_Mat
 
 subprocess.call (["Rscript", "--vanilla", "/home/claudio/Comp_Genetics/scripts/13_Tree_from_matrix.R", condition])
 subprocess.call (["Rscript", "--vanilla", "/home/claudio/Comp_Genetics/scripts/14_General_LinLoc.R", condition])
+subprocess.check_call(['mv'] + glob.glob('/home/claudio/Comp_Genetics/scripts/{0}*'.format(condition)) + ['../{0}_Results/'.format(condition)])
+subprocess.call(['mv', '/home/claudio/Comp_Genetics/scripts/output', '../{0}_Results/'.format(condition)])
+
