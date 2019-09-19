@@ -8,9 +8,9 @@ import glob
 
 condition = sys.argv[1]
 
-subprocess.call(['mkdir', '/home/claudio/Comp_Genetics/{0}_Results/'.format(condition)])
+# snakemake mkdir automat subprocess.call(['mkdir', '/home/claudio/Comp_Genetics/{0}_Results/'.format(condition)])
 
-all_phenotypes = pd.read_csv('/home/claudio/Comp_Genetics/results/bugwas_phenotypes.tsv', sep = '\t')
+all_phenotypes = pd.read_csv('/home/claudio/Comp_Genetics/input/bugwas_phenotypes.tsv', sep = '\t')
 genotypes = pd.read_csv('/home/claudio/Comp_Genetics/raw_data/genotypes_noref_formatted.tsv', sep = '\t')
 
 subset_phenotypes = all_phenotypes[all_phenotypes['pheno'].str.contains(condition)]
@@ -64,9 +64,10 @@ with open('/home/claudio/Comp_Genetics/{0}_Results/{0}_snps.vcf'.format(conditio
 
 with open('/home/claudio/Comp_Genetics/{0}_Results/{0}_snps.vcf.gz'.format(condition), 'w') as snpsfile:
     subprocess.call(['bgzip', '-c', '/home/claudio/Comp_Genetics/{0}_Results/{0}_snps.vcf'.format(condition)], stdout = snpsfile)
-subprocess.call(['/home/claudio/Comp_Genetics/tassel-5-standalone/run_pipeline.pl', '-Xms512m', '-Xmx10g', '-importGuess', '/home/claudio/Comp_Genetics/{0}_Results/{0}_snps.vcf.gz'.format(condition), '-CreateTreePlugin', '-clusteringMethod', 'Neighbor_Joining', '-endPlugin', '-export', 'hello_there', '-exportType', 'SqrMatrix'])
-subprocess.call(['rm', '/home/claudio/Comp_Genetics/scripts/hello_there1.txt'])
-subprocess.call(['mv', '/home/claudio/Comp_Genetics/scripts/hello_there2.txt', '/home/claudio/Comp_Genetics/{0}_Results/{0}_Distance_Matrix.tsv'.format(condition)])
+subprocess.call(['rm', '/home/claudio/Comp_Genetics/{0}_Results/{0}_snps.vcf'.format(condition)])
+subprocess.call(['/home/claudio/Comp_Genetics/tassel-5-standalone/run_pipeline.pl', '-Xms512m', '-Xmx10g', '-importGuess', '/home/claudio/Comp_Genetics/{0}_Results/{0}_snps.vcf.gz'.format(condition), '-CreateTreePlugin', '-clusteringMethod', 'Neighbor_Joining', '-endPlugin', '-export', '/home/claudio/Comp_Genetics/{0}_Results/hello.txt'.format(condition), '-exportType', 'SqrMatrix'])
+subprocess.call(['rm', '/home/claudio/Comp_Genetics/{0}_Results/hello1.txt'.format(condition)])
+subprocess.call(['mv', '/home/claudio/Comp_Genetics/{0}_Results/hello2.txt'.format(condition), '/home/claudio/Comp_Genetics/{0}_Results/{0}_Distance_Matrix.tsv'.format(condition)])
 
 with open('/home/claudio/Comp_Genetics/{0}_Results/{0}_Distance_Matrix_2.tsv'.format(condition), 'w') as tsvfile:
     subprocess.call(['tail', '-n', '+6', '/home/claudio/Comp_Genetics/{0}_Results/{0}_Distance_Matrix.tsv'.format(condition)], stdout = tsvfile)
