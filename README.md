@@ -21,7 +21,7 @@ regex operations. Related to this formatting isue I also found that some sample 
 That is, in the genotype and phylogenetic data the samples were named following their assembly fasta format convention: 'sample_NNN.fa' where N is any random number 
 between 0 and 9 that serves as a unique identifier; while on the phenotype data those were named just with the sample name: 'sample'. 
 
-This was one of the first scripts I wrote with Tilman's help. 
+This was one of the first Tilman helped me integrate. 
 ```bash
 sed 's:_[0-9]*\.fasta::g' tree.nwk > tree_clear.nwk
 ```
