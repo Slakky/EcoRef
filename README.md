@@ -33,6 +33,30 @@ to perform traditional GWAS on the dataset while accounting for population struc
 population genetics terms, since even though I've seen them on lectures I wanted to make sure I understood the concepts on the practical level before jumping
 into the whole data in - data out bioinformatic analysis. 
 
+## Introduction
+
+Bacerial GWAS two main problems we need to deal with: strong pop structure and causative variation presence on the pangenome 
+
+haploid clonal nature -> all variants are correlated. If after 100 generations we introduce 50 new mutations of which one is causal of the phenotype of study, we will not be able to pinpoint with enough resolution the variant as causal. Instead we would find that all 50 variants are related to the phenotype (since they are correlated between them)
+
+In other organisms GWASs there is also correlation between variants due to LD, but this usually decays after some kb, allowing us to map the association to certain regions. This is not possible in bacteria bc LD is present genome-wide. All of this results in a strong population structure that will greatly increase type I error (false positives). 
+
+But there are cases were an association may be mapped to locus effects. Both horizontal DNA transfer and homoplasy across the genealogy can help break the LD and correlation of variants across the genome. The relative importance of either of these factors will depend on the species of study
+
+
+
+
+
+
+
+strong population structue -> how to discern between causal variants (locus variants) and lineage variants? 
+
+## Methods
+
+## Results
+
+## Discussion
+
 ## Bibliography
 
 1. Galardini, M. et al. Phenotype inference in an Escherichia coli strain panel. eLife 6, (2017).
