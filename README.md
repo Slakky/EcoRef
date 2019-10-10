@@ -41,7 +41,9 @@ haploid clonal nature -> all variants are correlated. If after 100 generations w
 
 In other organisms GWASs there is also correlation between variants due to LD, but this usually decays after some kb, allowing us to map the association to certain regions. This is not possible in bacteria bc LD is present genome-wide. All of this results in a strong population structure that will greatly increase type I error (false positives). 
 
-But there are cases were an association may be mapped to locus effects. Both horizontal DNA transfer and homoplasy across the genealogy can help break the LD and correlation of variants across the genome. The relative importance of either of these factors will depend on the species of study
+Not every causative variant is going to be hidden under lineage effects. There are cases were an association might be correctly mapped to locus effects. Both horizontal DNA transfer and homoplasy across the genealogy can help break the LD and the correlation of variants across the genome. The relative importance of either of these factors will depend on the species of study. 
+
+The classic approach of snp calling against a reference although usefull as a first overview of the population, it doesnt allow us to map common variation 
 
 
 
