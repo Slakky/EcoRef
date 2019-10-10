@@ -25,7 +25,7 @@ The classic approach of snp calling against a reference although usefull as a fi
 
 ## Methods
 
-I dont where to comment on the dataset (number of strains, environments, origin etc). For me it makes more sense to comment on it in methdos but idk.  
+I dont know where to comment on the dataset (number of strains, environments, origin etc). For me it makes more sense to comment on it in methdos but idk.  
 
 Two different approaches to the problem: bugwas [3] and pyseer [4].
 
