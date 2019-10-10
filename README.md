@@ -54,6 +54,11 @@ Show whatever is my final result
 
 ## Discussion
 
+Will my work be usefull? Is it replicable? Is it reproducible? 
+
+Comment on what I learnt and experience??
+
+
 ## Bibliography
 
 1. Galardini, M. et al. Phenotype inference in an Escherichia coli strain panel. eLife 6, (2017).
