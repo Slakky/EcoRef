@@ -50,7 +50,7 @@ Document the scripts to format the data for the input and plotting. This time th
 
 If I see something interesting on the 4 environments im prototiping now -> show different results (bugwas pyseer and different runs within pyseer) in the 4 different environments.
 
-Show whatever is my final result
+Show whatever is my final result if applicable
 
 ## Discussion
 
