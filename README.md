@@ -27,7 +27,7 @@ The classic approach of snp calling against a reference although usefull as a fi
 
 I dont where to comment on the dataset (number of strains, environments, origin etc). For me it makes more sense to comment on it in methdos but idk.  
 
-Two different approaches to the problem: bugwas and pyseer.
+Two different approaches to the problem: bugwas [3] and pyseer [4].
 
 Explain what is bugwas based on, how does it solve the two problems described above. Document the python script used to properly format the data for bugwas. Mention also snakemake. 
 
@@ -40,6 +40,7 @@ How does pyseer improve this? Explain the three different runs I made.
     - population structure -> phylogeny
     - population structue -> genotype kinship
   - genotype variation using kmers
+    Comment on the scripts used to get the assemblies and to count unitigs [5]
 
 
 Document the scripts to format the data for the input and plotting. This time the formatting scripts are based on command tools such awk and sed. Ideally I would make a snake pipeline with an option to choose the type of run. 
@@ -56,4 +57,7 @@ Show whatever is my final result
 ## Bibliography
 
 1. Galardini, M. et al. Phenotype inference in an Escherichia coli strain panel. eLife 6, (2017).
-2. Forsberg, S., Bloom, J., Sadhu, M., Kruglyak, L. & Carlborg, Ö. Accounting for genetic interactions improves modeling of individual quantitative trait phenotypes in yeast. Nature Genetics 49, 497-503 (2017).
+2. Forsberg, S., Bloom, J., Sadhu, M., Kruglyak, L. & Carlborg, Ö. Accounting for genetic interactions improves modeling of individual quantitative trait phenotypes in yeast. Nature Genetics 49:497-503 (2017).
+3. Earle, S. et al. Identifying lineage effects when controlling for population structure improves power in bacterial association studies. Nature Microbiology 1, (2016).
+4. Lees, John A., Galardini, M., et al. pyseer: a comprehensive tool for microbial pangenome-wide association studies. Bioinformatics 34:4310–4312 (2018).
+5. Jaillard M., Lima L. et al. A fast and agnostic method for bacterial genome-wide association studies: Bridging the gap between k-mers and genetic events. PLOS Genetics. 14, e1007758 (2018). 
