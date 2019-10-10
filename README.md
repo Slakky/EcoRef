@@ -8,32 +8,9 @@
 3. Beef up statistical knowledge
 4. Independent research and problem solving
 
-## Problems encountered and solutions  - if applicable
-
-First of all, getting familiar with the dataset and understanding how the data was generated / curated. In this case, the phenotype data obtained
-was properly controlled to avoid confounding effects. The phentoype measured in the dataset is growth. This growth is expressed as an s-score
-relative to the total growth of the reference strain (strain 'NT12001'). 
-
-On this step I encountered my first problem. The terminology was not consisten through the data, while some times the reference strain was referred 
-as 'reference' some others it was referred as 'NT12001'. In order to solve this problem I had to start getting more familiar with UNIX text processing
-tools such as *awk* or *sed*, due to their clear advantage over script languages when dealing with huge amount of data and relatively simple
-regex operations. Related to this formatting isue I also found that some sample names were not matching between the phenotype data and the genotype data.
-That is, in the genotype and phylogenetic data the samples were named following their assembly fasta format convention: 'sample_NNN.fa' where N is any random number 
-between 0 and 9 that serves as a unique identifier; while on the phenotype data those were named just with the sample name: 'sample'. 
-
-This was one of the first Tilman helped me integrate. 
-```bash
-sed 's:_[0-9]*\.fasta::g' tree.nwk > tree_clear.nwk
-```
-
-In perspective I am now able to write more complex sed and awk scripts (see below). 
-
-Once I *thought* the datasets were properly formatted I started to look for available tools in the literature that would allow me
-to perform traditional GWAS on the dataset while accounting for population structure and lineage effects. But first I needed to get familiar with this
-population genetics terms, since even though I've seen them on lectures I wanted to make sure I understood the concepts on the practical level before jumping
-into the whole data in - data out bioinformatic analysis. 
-
 ## Introduction
+
+Introduce GWAS topic and results previously seen on yeast. 3 - 4 sentences top.
 
 Bacerial GWAS two main problems we need to deal with: strong pop structure and causative variation presence on the pangenome 
 
@@ -41,21 +18,38 @@ haploid clonal nature -> all variants are correlated. If after 100 generations w
 
 In other organisms GWASs there is also correlation between variants due to LD, but this usually decays after some kb, allowing us to map the association to certain regions. This is not possible in bacteria bc LD is present genome-wide. All of this results in a strong population structure that will greatly increase type I error (false positives). 
 
-Not every causative variant is going to be hidden under lineage effects. There are cases were an association might be correctly mapped to locus effects. Both horizontal DNA transfer and homoplasy across the genealogy can help break the LD and the correlation of variants across the genome. The relative importance of either of these factors will depend on the species of study. 
+But not every causative variant is going to be hidden under lineage effects. There are cases were an association might be correctly mapped to locus effects. Both horizontal DNA transfer and homoplasy across the genealogy can help break the LD and the correlation of variants across the genome. The relative importance of either of these factors will depend on the species of study. 
 
-The classic approach of snp calling against a reference although usefull as a first overview of the population, it doesnt allow us to map common variation 
+The classic approach of snp calling against a reference although usefull as a first attempt at describing the population, doesnt allow us to map most common variation present in the pangenome. The alignment nature of SNP calling implies that there are going to be missaligned regions that will jeopardize our power to detect variants of interest. This gets worse when we have big amounts of sequences not shared between the whole population. 
 
-
-
-
-
-
-
-strong population structue -> how to discern between causal variants (locus variants) and lineage variants? 
 
 ## Methods
 
+I dont where to comment on the dataset (number of strains, environments, origin etc). For me it makes more sense to comment on it in methdos but idk.  
+
+Two different approaches to the problem: bugwas and pyseer.
+
+Explain what is bugwas based on, how does it solve the two problems described above. Document the python script used to properly format the data for bugwas. Mention also snakemake. 
+
+Why I didnt trust the bugwas results? -> there's no support for continuous phenotypes, not clear output, manhattan plots are filled with lineage effects. 
+
+How does pyseer improve this? Explain the three different runs I made.
+
+  - genotype variation using SNPs (VCF)
+    - population structure -> mash
+    - population structure -> phylogeny
+    - population structue -> genotype kinship
+  - genotype variation using kmers
+
+
+Document the scripts to format the data for the input and plotting. This time the formatting scripts are based on command tools such awk and sed. Ideally I would make a snake pipeline with an option to choose the type of run. 
+
+
 ## Results
+
+If I see something interesting on the 4 environments im prototiping now -> show different results (bugwas pyseer and different runs within pyseer) in the 4 different environments.
+
+Show whatever is my final result
 
 ## Discussion
 
