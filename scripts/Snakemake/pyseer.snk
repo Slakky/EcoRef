@@ -23,7 +23,7 @@ rule pheno_files:
         for i in set(list(phenotypes.iloc[:, 0])):
             subset_pheno = phenotypes[phenotypes['condition'] == str(i)]
             subset_pheno = phenotypes.drop(['condition'], axis=1)
-            subset_pheno.to_csv(os.path.join(config['phenotype_dir'], '{}.tsv'.format(i), sep='\t', index=False)
+            subset_pheno.to_csv(os.path.join(config['phenotype_dir'], '{}.tsv'.format(i)), sep='\t', index=False)
 
 
 rule index_norm_vcf:
