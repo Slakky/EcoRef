@@ -71,8 +71,8 @@ rule pyseer:
         out = expand(os.path.join(config['output_dir'], '{pheno}.txt'), pheno=wild),
         log = expand(os.path.join(config['output_dir'], '{pheno}.out'), pheno=wild)
     params:
-        min_af = config['min-af']
-        max_af = config['max-af']
+        min_af = config['min-af'],
+        max_af = config['max-af'],
         cpu = config['cpu']
     shell:
         "pyseer --lmm --phenotypes {input.pheno} --vcf {input.vcf} --similarity {input.K} --output-patterns {output.patterns} --cpu {params.cpu} --min-af {params.min_af} --max-af {params.max_af} --lineage --lineage-file {output.lineage_file} --distances {input.K} > {output.out} 2> {output.log}"
