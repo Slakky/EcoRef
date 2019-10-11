@@ -1,0 +1,100 @@
+import pandas as pd
+import os
+
+configfile: 'pyseer_config.yaml'
+
+phenotypes = pd.read_csv(config['base_dir'] + '/phenotypic_data.tsv', sep='\t')
+wild = list(set([i for i in list(phenotypes['condition'])]))
+
+
+rule all:
+     input:
+        expand(directory(os.path.join(config['output_dir'], '{pheno}.plot')), env=wild)
+
+rule pheno_files:
+
+"""
+        the input file needs to have the following in the first three columns:
+
+        condition   strain  measurement
+        cond1   strain1 0.5
+        cond1   strain2 0.4
+        cond1   strain3 0.2
+        cond2   strain2 0.8
+        cond2   strain4 0.9
+
+"""
+
+    input:
+        os.path.join(config['base_dir'], 'phenotypic_data.tsv')
+    output:
+        expand(os.path.join(config['base_dir'], '/phenotypes/{pheno}.tsv'), pheno=wild)
+    run:
+        import pandas as pd
+        pheno = pd.read_csv(input, sep='\t')
+        pheno = pheno.drop(pheno.columns[3:], axis=1)
+        pheno.rename(columns={pheno.columns[0]: 'condition', pheno.columns[1]: 'strain', pheno.columns[2]: 'measurement'})
+        for i in set(list(pheno.iloc[:, 0])):
+            pheno[pheno['condition'] == str(i)]
+            small_pheno = pheno.drop(['condition'], axis=1)
+            small_pheno.to_csv(output, sep='\t', index=False)
+
+
+rule index_norm_vcf:
+    input:
+        os.path.join(config['base_dir'], 'snps.vcf.gz')
+    output:
+        os.path.join(config['base_dir'], 'snps.vcf.gz.tbi')
+    shell:
+    	"gunzip {input}"
+    	"bcftools norm -m - {input} | bgzip -c > {input}"
+    	"tabix -p vcf {input} > {output}"
+
+
+rule phenolist:
+    input:
+        expand(os.path.join(config['phenotype_dir'], '{pheno}.tsv'), pheno=wild)
+    output:
+        expand(os.path.join(config['output_dir'], '{pheno}_phenolist.tsv'), pheno=wild)
+    params:
+        path = config['output_dir']
+    shell:
+        "sed '1d' {input} | cut -f 1 > {output}"
+
+
+rule kinship:
+    input:
+        phenolist = expand(os.path.join(config['output_dir'], '{pheno}_phenolist.tsv'), pheno=wild),
+        vcf = os.path.join(config['base_dir'], 'snps.vcf.gz'),
+        index = os.path.join(config['base_dir'], 'snps.vcf.gz.tbi')
+    output:
+        expand(os.path.join(config['output_dir'], '{pheno}_K.tsv'), pheno=wild)
+    shell:
+        "similarity_pyseer --vcf {input.vcf} {input.phenolist} > {output}"
+
+
+rule pyseer:
+
+    input:
+        pheno = expand(os.path.join(config['phenotype_dir'], '{pheno}.tsv'), pheno=wild),
+        vcf = os.path.join(config['base_dir'], 'snps.vcf.gz'),
+        K = expand(os.path.join(config['output_dir'], '{pheno}_K.tsv'), pheno=wild)
+    output:
+        patterns = expand(os.path.join(config['output_dir'], '{pheno}_patterns.txt'), pheno=wild),
+        lineage_file = expand(os.path.join(config['output_dir'], '{pheno}.lineage'), pheno=wild),
+        out = expand(os.path.join(config['output_dir'], '{pheno}.txt'), pheno=wild),
+        log = expand(os.path.join(config['output_dir'], '{pheno}.out'), pheno=wild)
+    params:
+        min_af = config['min-af']
+        max_af = config['max-af']
+        cpu = config['cpu']
+    shell:
+        "pyseer --lmm --phenotypes {input.pheno} --vcf {input.vcf} --similarity {input.K} --output-patterns {output.patterns} --cpu {params.cpu} --min-af {params.min_af} --max-af {params.max_af} --lineage --lineage-file {output.lineage_file} --distances {input.K} > {output.out} 2> {output.log}"
+
+ rule to_plot:
+    input:
+        expand(os.path.join(config['output_dir'], '{pheno}.txt'), pheno=wild)
+    output:
+        expand(os.path.join(config['output_dir'], '{pheno}.plot'), pheno=wild)
+    shell:
+        'cat <(echo "CHR SNP BP P B MDS MAF H2") <(paste <(sed "1d" {input} | cut -f 1 | cut -d "_" -f 3,4) <(sed "1d" {input}  | cut -d "_" -f 2) <(sed "1d" {input}  | cut -f 4) <(sed "1d" {input}  | cut -f 5) <(sed "1d" {input}  | awk "{ print ( $(NF) ) }") <(sed "1d" {input}  | cut -f 2) <(sed "1d" {input} | cut -f 7) | awk "{if($6>0.5){print "26",$1,$2,$3,$4,$5,1-$6,$7}else{print "26",$1,$2,$3,$4,$5,$6,$7}}" ) | tr "" "\t" > {output}'

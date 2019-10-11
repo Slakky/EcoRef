@@ -1,0 +1,9 @@
+output_dir:
+  /home/claudio/nas/LMM_VCF_VCF
+base_dir:
+  /home/claudio/nas
+phenotype_dir:
+  base_dir + /phenotypes
+cpu: 1
+min-af: 0.05
+max-af: 1-0.05
