@@ -18,7 +18,7 @@ rule pheno_files:
         expand(os.path.join(config['phenotype_dir'], '{pheno}.tsv'), pheno=wild)
     run:
         import pandas as pd
-        phenotypes = pd.read_csv(input, sep='\t')
+        phenotypes = pd.read_csv('input', sep='\t')
         phenotypes = phenotypes.drop(phenotypes.columns[3:], axis=1)
         phenotypes.rename(columns={phenotypes.columns[0]: 'condition', phenotypes.columns[1]: 'strain', phenotypes.columns[2]: 'measurement'})
         for i in set(list(phenotypes.iloc[:, 0])):
