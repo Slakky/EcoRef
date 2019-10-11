@@ -15,7 +15,7 @@ rule pheno_files:
     input:
         os.path.join(config['base_dir'], 'phenotypic_data.tsv')
     output:
-        res = expand(os.path.join(config['phenotype_dir'], '{pheno}.tsv'), pheno=wild)
+        os.path.join(config['phenotype_dir'], '{pheno}.tsv')
     run:
         phenotypes = pd.read_csv(input[0], sep='\t')
         phenotypes = phenotypes.drop(phenotypes.columns[3:], axis=1)
@@ -39,9 +39,9 @@ rule index_norm_vcf:
 
 rule phenolist:
     input:
-        expand(os.path.join(config['phenotype_dir'], '{pheno}.tsv'), pheno=wild)
+        os.path.join(config['phenotype_dir'], '{pheno}.tsv')
     output:
-        expand(os.path.join(config['output_dir'], '{pheno}_phenolist.tsv'), pheno=wild)
+        os.path.join(config['output_dir'], '{pheno}_phenolist.tsv')
     params:
         path = config['output_dir']
     shell:
@@ -50,25 +50,25 @@ rule phenolist:
 
 rule kinship:
     input:
-        phenolist = expand(os.path.join(config['output_dir'], '{pheno}_phenolist.tsv'), pheno=wild),
+        phenolist = os.path.join(config['output_dir'], '{pheno}_phenolist.tsv'),
         vcf = os.path.join(config['base_dir'], 'snps.vcf.gz'),
         index = os.path.join(config['base_dir'], 'snps.vcf.gz.tbi')
     output:
-        expand(os.path.join(config['output_dir'], '{pheno}_K.tsv'), pheno=wild)
+        os.path.join(config['output_dir'], '{pheno}_K.tsv')
     shell:
         "similarity_pyseer --vcf {input.vcf} {input.phenolist} > {output}"
 
 
 rule pyseer:
     input:
-        pheno = expand(os.path.join(config['phenotype_dir'], '{pheno}.tsv'), pheno=wild),
+        pheno = os.path.join(config['phenotype_dir'], '{pheno}.tsv'),
         vcf = os.path.join(config['base_dir'], 'snps.vcf.gz'),
-        K = expand(os.path.join(config['output_dir'], '{pheno}_K.tsv'), pheno=wild)
+        K = os.path.join(config['output_dir'], '{pheno}_K.tsv')
     output:
-        patterns = expand(os.path.join(config['output_dir'], '{pheno}_patterns.txt'), pheno=wild),
-        lineage_file = expand(os.path.join(config['output_dir'], '{pheno}.lineage'), pheno=wild),
-        out = expand(os.path.join(config['output_dir'], '{pheno}.txt'), pheno=wild),
-        log = expand(os.path.join(config['output_dir'], '{pheno}.out'), pheno=wild)
+        patterns = os.path.join(config['output_dir'], '{pheno}_patterns.txt'),
+        lineage_file = os.path.join(config['output_dir'], '{pheno}.lineage'),
+        out = os.path.join(config['output_dir'], '{pheno}.txt'),
+        log = os.path.join(config['output_dir'], '{pheno}.out')
     params:
         min_af = config['min-af'],
         max_af = config['max-af'],
@@ -79,8 +79,8 @@ rule pyseer:
 
 rule to_plot:
     input:
-        expand(os.path.join(config['output_dir'], '{pheno}.txt'), pheno=wild)
+        os.path.join(config['output_dir'], '{pheno}.txt')
     output:
-        expand(os.path.join(config['output_dir'], '{pheno}.plot'), pheno=wild)
+        os.path.join(config['output_dir'], '{pheno}.plot')
     shell:
         'cat <(echo "CHR SNP BP P B MDS MAF H2") <(paste <(sed "1d" {input} | cut -f 1 | cut -d "_" -f 3,4) <(sed "1d" {input}  | cut -d "_" -f 2) <(sed "1d" {input}  | cut -f 4) <(sed "1d" {input}  | cut -f 5) <(sed "1d" {input}  | awk "{{ print ( $(NF) ) }}") <(sed "1d" {input}  | cut -f 2) <(sed "1d" {input} | cut -f 7) | awk "{{if($6>0.5){{print "26",$1,$2,$3,$4,$5,1-$6,$7}}else{{print "26",$1,$2,$3,$4,$5,$6,$7}}}}" ) | tr "" "\t" > {output}'
