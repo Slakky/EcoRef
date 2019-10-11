@@ -15,7 +15,7 @@ rule pheno_files:
     input:
         os.path.join(config['base_dir'], 'phenotypic_data.tsv')
     output:
-        expand(os.path.join(config['phenotype_dir'], '/{pheno}.tsv'), pheno=wild)
+        expand(os.path.join(config['phenotype_dir'], '{pheno}.tsv'), pheno=wild)
     run:
         import pandas as pd
         pheno = pd.read_csv(input, sep='\t')
