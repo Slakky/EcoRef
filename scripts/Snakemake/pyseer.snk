@@ -91,7 +91,8 @@ rule pyseer:
     shell:
         "pyseer --lmm --phenotypes {input.pheno} --vcf {input.vcf} --similarity {input.K} --output-patterns {output.patterns} --cpu {params.cpu} --min-af {params.min_af} --max-af {params.max_af} --lineage --lineage-file {output.lineage_file} --distances {input.K} > {output.out} 2> {output.log}"
 
- rule to_plot:
+
+rule to_plot:
     input:
         expand(os.path.join(config['output_dir'], '{pheno}.txt'), pheno=wild)
     output:
