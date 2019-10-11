@@ -9,7 +9,7 @@ wild = list(set([i for i in list(phenotypes['condition'])]))
 
 rule all:
      input:
-        expand(directory(os.path.join(config['output_dir'], '{pheno}.plot')), env=wild)
+        expand(directory(os.path.join(config['output_dir'], '{pheno}.plot')), pheno=wild)
 
 rule pheno_files:
     input:
