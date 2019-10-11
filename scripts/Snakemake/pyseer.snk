@@ -18,12 +18,12 @@ rule pheno_files:
         expand(os.path.join(config['phenotype_dir'], '{pheno}.tsv'), pheno=wild)
     run:
         import pandas as pd
-        pheno = pd.read_csv(input, sep='\t')
-        pheno = pheno.drop(pheno.columns[3:], axis=1)
-        pheno.rename(columns={pheno.columns[0]: 'condition', pheno.columns[1]: 'strain', pheno.columns[2]: 'measurement'})
-        for i in set(list(pheno.iloc[:, 0])):
-            pheno[pheno['condition'] == str(i)]
-            small_pheno = pheno.drop(['condition'], axis=1)
+        phenotypes = pd.read_csv(input, sep='\t')
+        phenotypes = phenotypes.drop(phenotypes.columns[3:], axis=1)
+        phenotypes.rename(columns={phenotypes.columns[0]: 'condition', phenotypes.columns[1]: 'strain', phenotypes.columns[2]: 'measurement'})
+        for i in set(list(phenotypes.iloc[:, 0])):
+            phenotypes[phenotypes['condition'] == str(i)]
+            small_pheno = phenotypes.drop(['condition'], axis=1)
             small_pheno.to_csv(output, sep='\t', index=False)
 
 
