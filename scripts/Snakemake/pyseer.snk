@@ -61,7 +61,6 @@ rule kinship:
 
 
 rule pyseer:
-
     input:
         pheno = expand(os.path.join(config['phenotype_dir'], '{pheno}.tsv'), pheno=wild),
         vcf = os.path.join(config['base_dir'], 'snps.vcf.gz'),
