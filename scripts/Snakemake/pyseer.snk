@@ -21,7 +21,7 @@ rule pheno_files:
         phenotypes = phenotypes.drop(phenotypes.columns[3:], axis=1)
         phenotypes.rename(columns={phenotypes.columns[0]: 'condition', phenotypes.columns[1]: 'strain', phenotypes.columns[2]: 'measurement'})
         for i in set(list(phenotypes.iloc[:, 0])):
-            phenotypes[phenotypes['condition'] == str(i)]
+            small_pheno = phenotypes[phenotypes['condition'] == str(i)]
             small_pheno = phenotypes.drop(['condition'], axis=1)
             small_pheno.to_csv(os.path.join(config['phenotype_dir'], 'i.tsv'), sep='\t', index=False)
 
