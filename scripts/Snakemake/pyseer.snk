@@ -12,19 +12,6 @@ rule all:
         expand(directory(os.path.join(config['output_dir'], '{pheno}.plot')), env=wild)
 
 rule pheno_files:
-
-"""
-        the input file needs to have the following in the first three columns:
-
-        condition   strain  measurement
-        cond1   strain1 0.5
-        cond1   strain2 0.4
-        cond1   strain3 0.2
-        cond2   strain2 0.8
-        cond2   strain4 0.9
-
-"""
-
     input:
         os.path.join(config['base_dir'], 'phenotypic_data.tsv')
     output:
