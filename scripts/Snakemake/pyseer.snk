@@ -15,7 +15,7 @@ rule pheno_files:
     input:
         os.path.join(config['base_dir'], 'phenotypic_data.tsv')
     output:
-        expand(os.path.join(config['phenotype_dir'], '{pheno}.tsv'), pheno=wild)
+        res = expand(os.path.join(config['phenotype_dir'], '{pheno}.tsv'), pheno=wild)
     run:
         phenotypes = pd.read_csv(input[0], sep='\t')
         phenotypes = phenotypes.drop(phenotypes.columns[3:], axis=1)
@@ -23,7 +23,7 @@ rule pheno_files:
         for i in set(list(phenotypes.iloc[:, 0])):
             phenotypes[phenotypes['condition'] == str(i)]
             small_pheno = phenotypes.drop(['condition'], axis=1)
-            small_pheno.to_csv(output, sep='\t', index=False)
+            small_pheno.to_csv(output.res, sep='\t', index=False)
 
 
 rule index_norm_vcf:
