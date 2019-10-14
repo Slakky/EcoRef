@@ -1,6 +1,6 @@
 # Genetic landscape and overview of the Ecoref dataset [1]
 
-## Workplace
+### Brief description of the course
 
 This research training course has been carried out at the IMBIM department of Comparative genetics and functional genomics in Uppsala University. Specifically at Örjan Carlborg research group. The course took place from the 1st of September to mid November. 
 
@@ -41,7 +41,7 @@ Interesting part:
     * I'm, not sure how / where we fit this in. do you think it has to be its own section, or do we hide this in the discussion?
  -->
  
-## Project initial goals
+### Project initial goals
 
 1. Try to replicate the general trends seen on yeast [2]
 1. Gain coding confidence both in Python and R
