@@ -40,6 +40,8 @@ Interesting part:
   - What worked well and what could have been done better?
     * I'm, not sure how / where we fit this in. do you think it has to be its own section, or do we hide this in the discussion?
  -->
+ 
+## Project initial goals
 
 1. Try to replicate the general trends seen on yeast [2]
 1. Gain coding confidence both in Python and R
