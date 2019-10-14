@@ -53,7 +53,9 @@ Interesting part:
 
 Introduce GWAS topic and results previously seen on yeast. 3 - 4 sentences top.
 
-Bacerial GWAS two main problems we need to deal with: strong pop structure and causative variation presence on the pangenome
+Why perform this analysis? 
+
+Bacterial GWAS two main problems we need to deal with: strong pop structure and causative variation presence on the pangenome
 
 haploid clonal nature -> all variants are correlated. If after 100 generations we introduce 50 new mutations of which one is causal of the phenotype of study, we will not be able to pinpoint with enough resolution the variant as causal. Instead we would find that all 50 variants are related to the phenotype (since they are correlated between them)
 
@@ -62,6 +64,8 @@ This is not specific to bacteria tho, In other organisms GWASs there is also cor
 But not every causative variant is going to be hidden under lineage effects. There are cases were an association might be correctly mapped to locus effects. Both horizontal DNA transfer and homoplasy across the genealogy can help break the LD and the correlation of variants across the genome. The relative importance of either of these factors will depend on the species of study.
 
 The classic approach of snp calling against a reference although usefull as a first attempt at describing the population, doesnt allow us to map most common variation present in the pangenome. The alignment nature of SNP calling implies that there are going to be missaligned regions that will jeopardize our power to detect variants of interest. This gets worse when we have big amounts of sequences not shared between the whole population.
+
+aims
 
 
 ## Methods
