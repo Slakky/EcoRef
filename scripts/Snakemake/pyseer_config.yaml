@@ -6,4 +6,4 @@ phenotype_dir:
   /home/claudio/nas/phenotypes
 cpu: 1
 min-af: 0.05
-max-af: 1-0.05
+max-af: 0.95
