@@ -1,4 +1,15 @@
 # Genetic landscape and overview of the Ecoref dataset [1]
+
+### Brief description of the course
+
+This research training course has been carried out at the IMBIM department of Comparative genetics and functional genomics in Uppsala University. Specifically at Örjan Carlborg research group. The course took place from the 1st of September to mid November. 
+
+Carlborg's group is focused on the search of genetic variants in the genome that are related to specific phenotypes of interest. This is done through the development of new bioinformatic tools and statistical methods to analyse the large amount of genetic information produced nowadays. Currently the group has two main lines of research, both of them focusing on the modifying effects other genes interactions and the environment have over certain variants. One of these lines -and their main focus right now- is focusing on the discovery of new variants of interest by analysing gene by gene interactions and the other aimed to study gene by environment interactions, although these two lines are not mutually exclusive.
+
+As a bioinformatics focused research laboratory, a common day at Carlborg's group revolves around coding. We have an indefinite lunch break and a fika break occasionally.
+
+Every friday we have a group meeting where everyone explains what has been done over the week and shows any results that  may have. On these group meetings I've had the oportunity to learn more about what the team is doing in terms of scientific research and I've also been able to learn new things about population genetics and genomics. Once a month there's a genomics section meeting where general administrative topics are discussed with all members of the department. 
+
 <!-- you will need to group this report into two parts, that i hereby designate "the boring part" and "the exciting part".
 from the student instructions for the research internship:
 Boring part:
@@ -29,7 +40,8 @@ Interesting part:
   - What worked well and what could have been done better?
     * I'm, not sure how / where we fit this in. do you think it has to be its own section, or do we hide this in the discussion?
  -->
-## Project's initial goals
+ 
+### Project initial goals
 
 1. Try to replicate the general trends seen on yeast [2]
 1. Gain coding confidence both in Python and R
@@ -41,7 +53,9 @@ Interesting part:
 
 Introduce GWAS topic and results previously seen on yeast. 3 - 4 sentences top.
 
-Bacerial GWAS two main problems we need to deal with: strong pop structure and causative variation presence on the pangenome
+Why perform this analysis? 
+
+Bacterial GWAS two main problems we need to deal with: strong pop structure and causative variation presence on the pangenome
 
 haploid clonal nature -> all variants are correlated. If after 100 generations we introduce 50 new mutations of which one is causal of the phenotype of study, we will not be able to pinpoint with enough resolution the variant as causal. Instead we would find that all 50 variants are related to the phenotype (since they are correlated between them)
 
@@ -50,6 +64,8 @@ This is not specific to bacteria tho, In other organisms GWASs there is also cor
 But not every causative variant is going to be hidden under lineage effects. There are cases were an association might be correctly mapped to locus effects. Both horizontal DNA transfer and homoplasy across the genealogy can help break the LD and the correlation of variants across the genome. The relative importance of either of these factors will depend on the species of study.
 
 The classic approach of snp calling against a reference although usefull as a first attempt at describing the population, doesnt allow us to map most common variation present in the pangenome. The alignment nature of SNP calling implies that there are going to be missaligned regions that will jeopardize our power to detect variants of interest. This gets worse when we have big amounts of sequences not shared between the whole population.
+
+aims
 
 
 ## Methods
