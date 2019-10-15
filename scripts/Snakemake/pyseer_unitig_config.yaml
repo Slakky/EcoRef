@@ -1,0 +1,12 @@
+output_dir:
+  /home/claudio/nas/unitig_output
+base_dir:
+  /home/claudio/nas
+phenotype_dir:
+  /home/claudio/nas/phenotypes
+assemblies_dir:
+  /home/claudio/nas/assemblies
+cpu: 1
+nb-cores: 1
+min-af: 0.05
+max-af: 0.95
