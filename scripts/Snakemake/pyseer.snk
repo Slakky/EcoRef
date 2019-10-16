@@ -83,4 +83,4 @@ rule to_plot:
     output:
         os.path.join(config['output_dir'], '{pheno}.plot')
     shell:
-        'cat <(echo "CHR SNP BP P B MDS MAF H2") <(paste <(sed "1d" {input} | cut -f 1 | cut -d "_" -f 3,4) <(sed "1d" {input}  | cut -d "_" -f 2) <(sed "1d" {input}  | cut -f 4) <(sed "1d" {input}  | cut -f 5) <(sed "1d" {input}  | awk "{{ print ( $(NF) ) }}") <(sed "1d" {input}  | cut -f 2) <(sed "1d" {input} | cut -f 7) | awk "{{if($6>0.5){{print 26,$1,$2,$3,$4,$5,1-$6,$7}}else{{print 26,$1,$2,$3,$4,$5,$6,$7}}}}" ) | tr "" "\t" > {output}'
+        'cat <(echo "CHR SNP BP P B MDS MAF H2") <(paste <(sed "1d" {input} | cut -f 1 | cut -d "_" -f 3,4) <(sed "1d" {input}  | cut -d "_" -f 2) <(sed "1d" {input}  | cut -f 4) <(sed "1d" {input}  | cut -f 5) <(sed "1d" {input}  | awk "{{ print $(NF) }}") <(sed "1d" {input}  | cut -f 2) <(sed "1d" {input} | cut -f 7) | awk "{{if($6>0.5){{print 26,$1,$2,$3,$4,$5,1-$6,$7}}else{{print 26,$1,$2,$3,$4,$5,$6,$7}}}}" ) | tr "" "\t" > {output}'
