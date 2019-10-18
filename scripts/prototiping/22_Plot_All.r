@@ -1,30 +1,58 @@
 library(qqman)
 library(scales)
 library(data.table)
-path = '~/Desktop/Plots/'
+library(RColorBrewer)
+path = '~/Desktop/Manhattans/'
+output = '~/Desktop/Plots/'
+
+## get all the file names with extensions from the path folder
 file.names <- dir(path, pattern = '*.plot')
-env.unique <- unique(sapply(strsplit(file.names, '\\.'), "[[", 1))
-conditions <- sapply(strsplit(file.names, '\\.'), "[[", 1)
-cond.freq <- as.data.frame(table(conditions))
-max.env <- cond.freq[cond.freq$Freq == max(cond.freq$Freq), 2]
 
-## initialize empty list
+## header sanity check
+headers.list <- lapply(paste(path,file.names, sep = ""), readLines, n = 1 )
+if (length(unique(headers.list)) != 1){
+  stop("The headers of your files do not match!")
+}
+
+## vector with every condition
+cond.unique <- unique(sapply(strsplit(file.names, '\\.'), "[[", 1))
+ 
 df.list <- list()
+nr.df = 0
+last.position = 1
 
-## loops through evert condition
-for (i in seq_along(env.unique)){
-## gets subconditions according to matching pattern 
-  files <- dir(path, pattern = sprintf('%s.*', env.unique[i]))
-## loops through every subcondition
+
+## loops integer through every condition
+for (i in seq_along(cond.unique)){
+  ## all files with the given condition 
+  files <- dir(path, pattern = sprintf('^%s.*.plot', cond.unique[i]))
+  ## vector with every subcondition 
+  subconditions <- sapply(strsplit(files, '\\.'), "[[", 2)
+  ## loops through every subcondition
   for (u in seq_along(files)){
     df <- read.table(paste(path, files[u], sep=""), stringsAsFactors = F, header = T)
-    df$COND <- rep(sprintf('%s', env.unique[i]), nrow(df))
-    df.list[[u]] <- df
+    
+    nr.df <- nr.df + 1
+    # Creates new COND column
+    df$COND <- rep(sprintf('%s %s', cond.unique[i], subconditions[u]), nrow(df))
+    names(df) <- NULL
+    df.list[[nr.df]] <- df
   }
-  ##  binding dataframes of the same condition
-  df.plot <- rbindlist(df.list[1:length(files)]) 
-  
-  ## plots here
-  #conditions <- alpha(c("#FF470C", "#1172AB", "#09BA60", "#FF920C"), 0.5)
+  ##  binding dataframes of the same condition to a single plottable df
+  df.plot <- rbindlist(df.list[last.position:nr.df])
+  names(df.plot) <- c(unlist(strsplit(headers.list[[1]], " ")), "COND")
+  last.position <- nr.df + 1
+    ## plots here
+  png(paste(output,sprintf('%s.png', cond.unique[i])))
+  colors <- alpha(c(brewer.pal(n = length(files), name = 'Dark2')), 0.5)
+  manhattan(df.plot, cex = 0.25, col = colors)
+  dev.off()
 }
+
+## LEGACY CODE - chunks of code not used but usefull for future reference ##
+
+## frequency table of how many sub conditions (0M, 0.5M, 1M) every condition has
+#cond.freq <- as.data.frame(table(sapply(strsplit(file.names, '\\.'), "[[", 1)))
+
+#max.env <- cond.freq[cond.freq$Freq == max(cond.freq$Freq), 2]
 
