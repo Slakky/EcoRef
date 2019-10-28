@@ -4,9 +4,9 @@
 
 This research training course has been carried out at the IMBIM department of Comparative genetics and functional genomics in Uppsala University. Specifically at Örjan Carlborg research group. The course took place from the 1st of September to mid November. 
 
-Carlborg's group is focused on the search of genetic variants in the genome that are related to specific phenotypes of interest. This is done through the development of new bioinformatic tools and statistical methods to analyse the large amount of genetic information produced nowadays. Currently the group has two main lines of research, both of them focusing on the modifying effects other genes interactions and the environment have over certain variants. One of these lines -and their main focus right now- is focusing on the discovery of new variants of interest by analysing gene by gene interactions ('GxG' from now on) integrating both low coverage genome sequencing and evolutionary information. The other line is aimed to study gene by gene by environment ('GxGxE' from now on) interactions, with this approach the team has been able to identify environmental effects on epistatic loci [2].
+Carlborg's group is focused on the search of genetic variants in the genome that are related to specific phenotypes of interest. This is done through the development of new bioinformatic tools and statistical methods to analyse the large amount of genetic information produced nowadays. Currently the group has two main lines of research, both of them focusing on the modifying effects other genes interactions and the environment have over certain variants. One of these lines -and their main focus right now- is focusing on the discovery of new variants of interest by analysing gene by gene interactions ('GxG' from now on) integrating both low coverage genome sequencing and evolutionary information. The other line is aimed to study gene by environment ('GxE' from now on) interactions, with this approach the team has been able to identify environmental effects on epistatic loci [2].
 
-As a bioinformatics focused research laboratory, a common day at Carlborg's group revolves around coding. We have an indefinite lunch break and a fika break occasionally.
+As a bioinformatics focused research laboratory, a common day at Carlborg's group revolves around coding. We have an indefinite lunch break and a *fika* break occasionally.
 
 Every friday we have a group meeting where everyone explains what has been done over the week and shows any results that  may have. On these group meetings I've had the oportunity to learn more about what the team is doing in terms of scientific research and I've also been able to learn new things about population genetics and genomics. Once a month there's a genomics section meeting where general administrative topics are discussed with all members of the department. 
 
@@ -53,6 +53,20 @@ Interesting part:
 -->
 
 ## Introduction
+
+One of the main focuses of biology during the past 50 years has been the characterization of the genetic variation associated to certain diseases or anthropomorphic phenotypes such as weight or height. This has been possible thanks to the sequencing of the human genome [reference needed] and the discovery of whole-genome SNPs [Sachidanandam et al., 2001]. This led to the design of arrays that were able to genotype several variants in a genome-wide fashion. During the last decade, with the prices of sequencing a whole genome getting cheaper and cheaper, high-throughput sequencing has been the technology of choice, knocking off SNP arrays. 
+
+With both marker information - derived from variant calling on sequencing results - , and phenotypic measures Genome Wide Association Studies (GWAS) can be performed to test for association between the trait and the genetic variants in a population of interest.
+
+
+Traditionally, quantitative trait loci (QTLs) have been identified using linkage mapping populations such as recombinant inbred lines (RILs) and double haploid lines (DHs). However, such mapping populations are often generated from a cross between two parental lines. As a result, only a limited amount of natural allelic diversity can be captured in the population, leading to the identified QTLs spanning relatively large genomic regions and making identification of causal genes more difficult. Genome-wide association study (GWAS) utilizes the natural populations for QTL detection though marker-trait association [12, 13]. Integration of linkage mapping and GWAS provides a more powerful tool for identifying and verifying candidate genes underlying complex traits 
+While GWAS studies tests association at discrete markers, Quantitative Trait Locus mapping (QTL mapping) tests association between markers, usually identifying significant genes.
+
+But GWAS and QTL mapping 
+
+Carlborg's lab was able to apply these concepts to identify GxGxE interactions on a yeast dataset
+
+we have been able to find genetic variation which may contribute to a given phenotype of interest in a hypothesis-free manner. 
 
 Introduce GWAS topic and results previously seen on yeast. 3 - 4 sentences top.
 
@@ -122,7 +136,8 @@ Comment on what I learnt and experience??
 
 1. Galardini, M. et al. Phenotype inference in an Escherichia coli strain panel. eLife 6, (2017).
 2. Zan, Y., Carlborg, O. Yeast growth responses to environmental perturbations are associated with rewiring of large epistatic networks bioRxiv 659730
-3. Forsberg, S., Bloom, J., Sadhu, M., Kruglyak, L. & Carlborg, Ö. Accounting for genetic interactions improves modeling of individual quantitative trait phenotypes in yeast. Nature Genetics 49:497-503 (2017).
-4. Earle, S. et al. Identifying lineage effects when controlling for population structure improves power in bacterial association studies. Nature Microbiology 1, (2016).
-5. Lees, John A., Galardini, M., et al. pyseer: a comprehensive tool for microbial pangenome-wide association studies. Bioinformatics 34:4310–4312 (2018).
-6. Jaillard M., Lima L. et al. A fast and agnostic method for bacterial genome-wide association studies: Bridging the gap between k-mers and genetic events. PLOS Genetics. 14, e1007758 (2018).
+3. Moore, J., Asselbergs, F. & Williams, S. Bioinformatics challenges for genome-wide association studies. Bioinformatics 26, 445-455 (2010).
+4. Forsberg, S., Bloom, J., Sadhu, M., Kruglyak, L. & Carlborg, Ö. Accounting for genetic interactions improves modeling of individual quantitative trait phenotypes in yeast. Nature Genetics 49:497-503 (2017).
+5. Earle, S. et al. Identifying lineage effects when controlling for population structure improves power in bacterial association studies. Nature Microbiology 1, (2016).
+6. Lees, John A., Galardini, M., et al. pyseer: a comprehensive tool for microbial pangenome-wide association studies. Bioinformatics 34:4310–4312 (2018).
+7. Jaillard M., Lima L. et al. A fast and agnostic method for bacterial genome-wide association studies: Bridging the gap between k-mers and genetic events. PLOS Genetics. 14, e1007758 (2018).
