@@ -4,11 +4,13 @@
 
 This research training course has been carried out at the IMBIM department of Comparative genetics and functional genomics in Uppsala University. Specifically at Örjan Carlborg research group. The course took place from the 1st of September to mid November. 
 
-Carlborg's group is focused on the search of genetic variants in the genome that are related to specific phenotypes of interest. This is done through the development of new bioinformatic tools and statistical methods to analyse the large amount of genetic information produced nowadays. Currently the group has two main lines of research, both of them focusing on the modifying effects other genes interactions and the environment have over certain variants. One of these lines -and their main focus right now- is focusing on the discovery of new variants of interest by analysing gene by gene interactions and the other aimed to study gene by environment interactions, although these two lines are not mutually exclusive.
+Carlborg's group is focused on the search of genetic variants in the genome that are related to specific phenotypes of interest. This is done through the development of new bioinformatic tools and statistical methods to analyse the large amount of genetic information produced nowadays. Currently the group has two main lines of research, both of them focusing on the modifying effects other genes interactions and the environment have over certain variants. One of these lines -and their main focus right now- is focusing on the discovery of new variants of interest by analysing gene by gene interactions ('GxG' from now on) integrating both low coverage genome sequencing and evolutionary information. The other line is aimed to study gene by gene by environment ('GxGxE' from now on) interactions, with this approach the team has been able to identify environmental effects on epistatic loci [2].
 
 As a bioinformatics focused research laboratory, a common day at Carlborg's group revolves around coding. We have an indefinite lunch break and a fika break occasionally.
 
 Every friday we have a group meeting where everyone explains what has been done over the week and shows any results that  may have. On these group meetings I've had the oportunity to learn more about what the team is doing in terms of scientific research and I've also been able to learn new things about population genetics and genomics. Once a month there's a genomics section meeting where general administrative topics are discussed with all members of the department. 
+
+As I've mentioned before, the group has two main lines of research. The one I've taken part of focuses on gene by gene by environment interactions. The group's idea is to do the same kind of analysis performed on yeast [2] on other species' datasets. What I've been doing on this research training course is a literature research to choose the most suitable software and to code the starting pipeline for the analyses. This will help the team on their future GxGxE projects.
 
 <!-- you will need to group this report into two parts, that i hereby designate "the boring part" and "the exciting part".
 from the student instructions for the research internship:
@@ -41,13 +43,14 @@ Interesting part:
     * I'm, not sure how / where we fit this in. do you think it has to be its own section, or do we hide this in the discussion?
  -->
  
-### Project initial goals
+<!---### Project initial goals
 
 1. Try to replicate the general trends seen on yeast [2]
 1. Gain coding confidence both in Python and R
 2. Learn the basics of Genome Wide Association Studies
 3. Beef up statistical knowledge
 4. Independent research and problem solving
+-->
 
 ## Introduction
 
@@ -118,7 +121,8 @@ Comment on what I learnt and experience??
 ## Bibliography
 
 1. Galardini, M. et al. Phenotype inference in an Escherichia coli strain panel. eLife 6, (2017).
-2. Forsberg, S., Bloom, J., Sadhu, M., Kruglyak, L. & Carlborg, Ö. Accounting for genetic interactions improves modeling of individual quantitative trait phenotypes in yeast. Nature Genetics 49:497-503 (2017).
-3. Earle, S. et al. Identifying lineage effects when controlling for population structure improves power in bacterial association studies. Nature Microbiology 1, (2016).
-4. Lees, John A., Galardini, M., et al. pyseer: a comprehensive tool for microbial pangenome-wide association studies. Bioinformatics 34:4310–4312 (2018).
-5. Jaillard M., Lima L. et al. A fast and agnostic method for bacterial genome-wide association studies: Bridging the gap between k-mers and genetic events. PLOS Genetics. 14, e1007758 (2018).
+2. Zan, Y., Carlborg, O. Yeast growth responses to environmental perturbations are associated with rewiring of large epistatic networks bioRxiv 659730
+3. Forsberg, S., Bloom, J., Sadhu, M., Kruglyak, L. & Carlborg, Ö. Accounting for genetic interactions improves modeling of individual quantitative trait phenotypes in yeast. Nature Genetics 49:497-503 (2017).
+4. Earle, S. et al. Identifying lineage effects when controlling for population structure improves power in bacterial association studies. Nature Microbiology 1, (2016).
+5. Lees, John A., Galardini, M., et al. pyseer: a comprehensive tool for microbial pangenome-wide association studies. Bioinformatics 34:4310–4312 (2018).
+6. Jaillard M., Lima L. et al. A fast and agnostic method for bacterial genome-wide association studies: Bridging the gap between k-mers and genetic events. PLOS Genetics. 14, e1007758 (2018).
