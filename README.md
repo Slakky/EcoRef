@@ -67,11 +67,11 @@ The classic approach for variant calling is based on alignment of the reads agai
 
 
 ## Methods
-# Biological data 
+### Biological data 
 
 The dataset used in this project is publicly available [2]. It consists of 696 Escherichia coli strains phenotyped for 214 environments. The measured phenotype is growth, quantified using an s-score that calculates the deviation from the expected growth. The authors provide phenotypic information – s-scores – and genotypic information – in a VCF file – that were used in my analyses. Other relevant information is also available for the dataset such as pangenome, phylogeny, conditions and strains. 
 
-# Software
+### Software
 
 After a literature research, two different programs were chosen as candidates to perform the analyses: bugwas [5] and pyseer [6].
 
@@ -81,7 +81,7 @@ Pyseer is a Python reimplementation of SEER [9]. What characterizes pyseer is it
 
 Although bugwas outputs plots directly, pyseer output is tab delimited. Because of this I had to re-implement manhattan (see next section) an existing R package that plots human-driven GWAS results.
 
-# Scripts
+### Scripts
 	
 Bioinformatic tools use input that have to be formatted in a specific way for the tool to work properly. This format rarely matches with the one your raw data has.  Because of this, in order to use the software mentioned above, the data had to be reformatted in a different manner depending on the software used.
 
