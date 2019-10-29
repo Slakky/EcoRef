@@ -3,7 +3,7 @@ import os
 
 configfile: 'config.yaml'
 
-phenotypes = pd.read_csv(config['input_dir'] + '/bugwas_phenotypes.tsv', sep = '\t')
+phenotypes = pd.read_csv(config['phenotypes'], sep = '\t')
 wild = list(set([i.split('_')[0] for i in list(phenotypes['pheno'])]))
 
 
