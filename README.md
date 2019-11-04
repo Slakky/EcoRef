@@ -2,13 +2,16 @@
 
 ### Brief description of the course
 
-This research training course has been carried out at the IMBIM department of Comparative genetics and functional genomics in Uppsala University. Specifically at Örjan Carlborg research group. The course took place from the 1st of September to mid November. 
+This research training course has been carried out at the IMBIM department of Comparative genetics and functional genomics in Uppsala University. Specifically, at Örjan Carlborg’s research group. The course took place from the 1st of September to mid-November. 
 
-Carlborg's group is focused on the search of genetic variants in the genome that are related to specific phenotypes of interest. This is done through the development of new bioinformatic tools and statistical methods to analyse the large amount of genetic information produced nowadays. Currently the group has two main lines of research, both of them focusing on the modifying effects other genes interactions and the environment have over certain variants. One of these lines -and their main focus right now- is focusing on the discovery of new variants of interest by analysing gene by gene interactions and the other aimed to study gene by environment interactions, although these two lines are not mutually exclusive.
+Carlborg's group is focused on the search of genetic variants in the genome that are related to specific phenotypes of interest. This is done through the development of new bioinformatic tools and statistical methods to analyze the large amount of genetic information produced nowadays. Currently the group has two main lines of research, both of them focusing on the modifying effects epistasis and the environment have over variants associated with given phenotypes. One of these lines -and their main focus right now- is focusing on the discovery of new variants of interest by analyzing gene by gene interactions ('GxG' from now on) integrating both low coverage genome sequencing and evolutionary information. The other line is aimed to study gene by environment ('GxE' from now on) interactions, with this approach the team has been able to identify environmental effects on epistatic loci in yeast [1]. These are gene by gene by environment interactions (‘GxGxE’ from now on).
 
 As a bioinformatics focused research laboratory, a common day at Carlborg's group revolves around coding. We have an indefinite lunch break and a fika break occasionally.
 
-Every friday we have a group meeting where everyone explains what has been done over the week and shows any results that  may have. On these group meetings I've had the oportunity to learn more about what the team is doing in terms of scientific research and I've also been able to learn new things about population genetics and genomics. Once a month there's a genomics section meeting where general administrative topics are discussed with all members of the department. 
+Every Friday we have a group meeting where everyone explains what has been done over the week and shows any results that may have. On these group meetings I've had the opportunity to learn more about what the team is doing in terms of scientific research and I've also been able to learn new things about population genetics and genomics. Once a month there's a genomics section meeting where general administrative topics are discussed with all members of the department. 
+
+As I've mentioned before, the group has two main lines of research. The one I've taken part of focuses on gene by gene by environment interactions. The group's idea is to do the same kind of analysis performed on yeast [1] on a bacterial dataset.  In order to identify GxGxE interactions on bacteria we need first to find genetic variants associated with the given phenotype. Once this is done, further interaction analyses can be performed on these variants. During this research training course, I’ve done a literature research to look for available software to detect these variants and choose the most suitable program. In order to do so, I’ve tested two different programs (see Methods section) on a public Escherichia coli dataset [2]. I’ve also built the starting pipeline implementing these programs for the analyses that may be carried out on other bacterial datasets. This will help the team on their future bacterial GxGxE project. 
+
 
 <!-- you will need to group this report into two parts, that i hereby designate "the boring part" and "the exciting part".
 from the student instructions for the research internship:
@@ -41,42 +44,47 @@ Interesting part:
     * I'm, not sure how / where we fit this in. do you think it has to be its own section, or do we hide this in the discussion?
  -->
  
-### Project initial goals
+<!---### Project initial goals
 
 1. Try to replicate the general trends seen on yeast [2]
 1. Gain coding confidence both in Python and R
 2. Learn the basics of Genome Wide Association Studies
 3. Beef up statistical knowledge
 4. Independent research and problem solving
+-->
 
 ## Introduction
 
-Introduce GWAS topic and results previously seen on yeast. 3 - 4 sentences top.
+One of the main focuses of biology during the past 50 years has been the characterization of the genetic variation associated to certain phenotypes. It was possible thanks to the sequencing of the human genome [3] and the discovery of whole-genome SNPs [4]. This led to the design of arrays that were able to genotype several variants in a genome-wide fashion. During the last decade, with the prices of whole-genome sequencing getting cheaper and cheaper, high-throughput sequencing has been the technology of choice, knocking off SNP arrays.
 
-Why perform this analysis? 
+With both marker information - derived from variant calling on whole-genome sequencing - and phenotypic measures Genome Wide Association Studies (GWAS) can be performed to test for association between the trait and genetic markers in a population of interest. GWAS have been mostly focused on humans. But the increasing number of bacterial genomes available has caused GWAS to be used to determine genetic variation associated with different traits in bacterial populations. The main challenge of this project was to deal with bacterial GWAS problems: strong population structure and causative variation presence on the pangenome.
 
-Bacterial GWAS two main problems we need to deal with: strong pop structure and causative variation presence on the pangenome
+Due to the haploid clonal nature of bacteria and the lack of recombination, all variants in bacterial genomes are correlated.  What this means is that if we introduce 10 new variants in a bacterial population of which only one is causal of the phenotype of study, we will not be able to identify this variant as causal. Instead, we would find that all 10 variants are related to the phenotype since they are correlated between them due to the lack of recombination and the clonal nature of bacteria. This phenomenon can be seen as a genome-wide linkage disequilibrium. In turn, this generates clonal lineages with discrete genetic backgrounds. Associations between variants that are correlated with these genetic backgrounds and the phenotype are known as “lineage effects”. These effects although inevitable, should be taken into account. 
 
-haploid clonal nature -> all variants are correlated. If after 100 generations we introduce 50 new mutations of which one is causal of the phenotype of study, we will not be able to pinpoint with enough resolution the variant as causal. Instead we would find that all 50 variants are related to the phenotype (since they are correlated between them)
+Is every variant association going to be cofounded with lineage effects? No. There are cases were an association might be correctly mapped to “locus effects”. Both horizontal DNA transfer and homoplasy across the phylogeny can help break the LD and the correlation of variants across the genome. The relative importance of either of these factors will depend on the species of study.
 
-This is not specific to bacteria tho, In other organisms GWASs there is also correlation between variants due to LD, but this usually decays after some kb, allowing us to map the association to certain regions. This is not possible in bacteria bc LD is present genome-wide. All of this results in a strong population structure that will greatly increase type I error (false positives).
-
-But not every causative variant is going to be hidden under lineage effects. There are cases were an association might be correctly mapped to locus effects. Both horizontal DNA transfer and homoplasy across the genealogy can help break the LD and the correlation of variants across the genome. The relative importance of either of these factors will depend on the species of study.
-
-The classic approach of snp calling against a reference although usefull as a first attempt at describing the population, doesnt allow us to map most common variation present in the pangenome. The alignment nature of SNP calling implies that there are going to be missaligned regions that will jeopardize our power to detect variants of interest. This gets worse when we have big amounts of sequences not shared between the whole population.
-
-aims
+The classic approach for variant calling is based on alignment of the reads against a reference genome. The choice of the reference genome is key on bacterial populations. If we only include the core genome, there are going to be misalignments with the accessory genomes of the different strains. This would jeopardize our power to detect variants of interest. It is preferred then to use the pangenome as the reference genome when working with bacterial populations. 
 
 
 ## Methods
+### Biological data 
 
-I dont know where to comment on the dataset (number of strains, environments, origin etc). For me it makes more sense to comment on it in methdos but idk.  
+The dataset used in this project is publicly available [2]. It consists of 696 Escherichia coli strains phenotyped for 214 environments. The measured phenotype is growth, quantified using an s-score that calculates the deviation from the expected growth. The authors provide phenotypic information – s-scores – and genotypic information – in a VCF file – that were used in my analyses. Other relevant information is also available for the dataset such as pangenome, phylogeny, conditions and strains. 
 
-Two different approaches to the problem: bugwas [3] and pyseer [4].
+### Software
 
-Explain what is bugwas based on, how does it solve the two problems described above. Document the python script used to properly format the data for bugwas. Mention also snakemake.
+After a literature research, two different programs were chosen as candidates to perform the analyses: bugwas [5] and pyseer [6].
 
-Why I didnt trust the bugwas results? -> there's no support for continuous phenotypes, not clear output, manhattan plots are filled with lineage effects.
+Bugwas is implemented in R and it tests for locus and lineage associations in bacterial GWAS. One thing to consider with bugwas is that it only takes binary, discrete phenotypes. The typical processing pipeline starts with an alignment-free k-mer counting to encapsulate genetic variability. This deals with the problem of not capturing enough variants due to the high variability in the pangenome of the bacterial population.  In order to test for lineage effects and locus effects bugwas is based on the fact that Principal Component Analysis (PCA) can correct for population structure on GWAS studies [7] if these are included as fixed effects on the Linear Mixed Model. Every Principal Component (PC) will correspond to a lineage on bacterial populations. To detect lineage effects while boosting power Bugwas includes the PC – read ‘lineages’ here – as random effects on the LMM and recovers indications of lineage-level associations. Then it tests these associations between the lineage and the phenotype using a Wald test [8]. One thing to consider with bugwas is that it only takes binary, discrete phenotypes.
+
+Pyseer is a Python reimplementation of SEER [9]. What characterizes pyseer is its comprehensive and reconciliating nature, adding previously separated approaches (bugwas and scoary) into one single package. Pyseer can take as input different formats that encapsulate genetic diversity in the population (SNPs, k-mers or presence/absence of COGs), it also incorporates different association models (Fixed effects Generalized Linear Models and Linear Mixed Models). Furthermore, it includes the bugwas method to estimate possible lineage effects.
+
+Although bugwas outputs plots directly, pyseer output is tab delimited. Because of this I had to re-implement manhattan (see next section) an existing R package that plots human-driven GWAS results.
+
+### Scripts
+	
+Bioinformatic tools use input that have to be formatted in a specific way for the tool to work properly. This format rarely matches with the one your raw data has.  Because of this, in order to use the software mentioned above, the data had to be reformatted in a different manner depending on the software used.
+
 
 <!--- regarding the lineage effects in bugwas: just out of interest, which MAF did you use? --->
 
@@ -118,7 +126,9 @@ Comment on what I learnt and experience??
 ## Bibliography
 
 1. Galardini, M. et al. Phenotype inference in an Escherichia coli strain panel. eLife 6, (2017).
-2. Forsberg, S., Bloom, J., Sadhu, M., Kruglyak, L. & Carlborg, Ö. Accounting for genetic interactions improves modeling of individual quantitative trait phenotypes in yeast. Nature Genetics 49:497-503 (2017).
-3. Earle, S. et al. Identifying lineage effects when controlling for population structure improves power in bacterial association studies. Nature Microbiology 1, (2016).
-4. Lees, John A., Galardini, M., et al. pyseer: a comprehensive tool for microbial pangenome-wide association studies. Bioinformatics 34:4310–4312 (2018).
-5. Jaillard M., Lima L. et al. A fast and agnostic method for bacterial genome-wide association studies: Bridging the gap between k-mers and genetic events. PLOS Genetics. 14, e1007758 (2018).
+2. Zan, Y., Carlborg, O. Yeast growth responses to environmental perturbations are associated with rewiring of large epistatic networks bioRxiv 659730
+3. Moore, J., Asselbergs, F. & Williams, S. Bioinformatics challenges for genome-wide association studies. Bioinformatics 26, 445-455 (2010).
+4. Forsberg, S., Bloom, J., Sadhu, M., Kruglyak, L. & Carlborg, Ö. Accounting for genetic interactions improves modeling of individual quantitative trait phenotypes in yeast. Nature Genetics 49:497-503 (2017).
+5. Earle, S. et al. Identifying lineage effects when controlling for population structure improves power in bacterial association studies. Nature Microbiology 1, (2016).
+6. Lees, John A., Galardini, M., et al. pyseer: a comprehensive tool for microbial pangenome-wide association studies. Bioinformatics 34:4310–4312 (2018).
+7. Jaillard M., Lima L. et al. A fast and agnostic method for bacterial genome-wide association studies: Bridging the gap between k-mers and genetic events. PLOS Genetics. 14, e1007758 (2018).
