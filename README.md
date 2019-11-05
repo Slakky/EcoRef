@@ -1,20 +1,7 @@
 
 # Accounting for population structure and lineage effects in bacterial GWAS
 
-##
-
-##
-
-##
-
-##
-
-##
-
-##
-
-
-**Brief description of the course**
+## Brief description of the course ##
 
 This research training course has been carried out in the section for Comparative genetics and functional genomics within the department for medical biochemistry and microbiology at Uppsala University. Specifically, in theresearch group for Computational genomics, lead by Prof. Örjan Carlborg. The course took place from the 1st of September to mid-November.
 
@@ -28,11 +15,7 @@ As I&#39;ve mentioned before, the group has two main lines of research. The one 
 
 
 
-
-
-
-
-**Introduction**
+## Introduction ##
 
 One of the main focuses of biology during the past 50 years has been the characterization of the genetic variation associated with certain phenotypes. It has been possible to identify this genetic variation thanks to the sequencing of the human genome  (International Human Genome Sequencing Consortium 2001) and the discovery of  the human genome sequence variation(The International SNP Map Working Group 2001). This led to the design of arrays that were able to genotype several variants in a genome-wide fashion. During the last decade, with the prices of whole-genome sequencing getting cheaper and cheaper, high-throughput sequencing has been the technology of choice, knocking off SNP arrays.
 
@@ -48,13 +31,13 @@ The classic approach for variant calling is based on alignment of the reads agai
 
 
 
-**Methods**
+## Methods ##
 
-Biological data
+### Biological data ###
 
-        The dataset used in this project is publicly available [https://evocellnet.github.io/ecoref/](https://evocellnet.github.io/ecoref/)(Galardini _et al._ 2017). It consists of 696 _Escherichia coli_ strains phenotyped for 214 environments. The measured phenotype is growth. The authors provide phenotypic information and genotypic information that were used in my analyses. Other relevant information is also available for the dataset such as pangenome, phylogeny, conditions and strains.
+The dataset used in this project is publicly available [https://evocellnet.github.io/ecoref/](Galardini _et al._ 2017). It consists of 696 _Escherichia coli_ strains phenotyped for 214 environments. The measured phenotype is growth. The authors provide phenotypic information and genotypic information that were used in my analyses. Other relevant information is also available for the dataset such as pangenome, phylogeny, conditions and strains.
 
-Software
+#### Software ####
 
 After a literature research, two different programs were chosen as candidates to perform the analyses: _bugwas_  (Earle _et al._ 2016) and _pyseer_(Lees _et al._ 2018).
 
@@ -64,7 +47,7 @@ _Pyseer_ is a Python reimplementation of SEER (Lees _et al._ 2016). What charact
 
 Although bugwas outputs plots directly, pyseer output consists of raw data in .tsv format. Because of this I had to modify qqman_(D. Turner 2018)_ an existing R package that plots human-driven GWAS results.
 
-Scripts
+#### Scripts ####
 
 An important technical difficulty of using _bugwas_ is making sure that the identity and order of samples between the VCF file, phenotype file and population structure match up correctly. Therefore, I had to code my own Python script to correctly format the data and match the samples among files before using these data as input to _bugwas_. Furthermore, I had to normalize between 0 and 1 the phenotype values and remove the invariant sites from the original VCF.
 
@@ -72,34 +55,28 @@ In order to run _bugwas_,a population phylogenetic tree has to be provided. As d
 
 The _pyseer_ implementation is more pipeline focused, defining rules and loops inside the pipeline. Hence, the processing is easier to follow and modify. The user has a _yaml_ config file where most tweakable parameters can be modified in addition to directories and other general best practices. _Pyseer_, although having more options and being more versatile than _bugwas,_ is more user-friendly, dealing with most of the formatting problems _bugwas_ has automatically.  The pipeline that is right now implemented is using a VCF file (--vcf) as input for genetic diversity in the samples, a linear mixed model for association (--lmm) that uses a kinship matrix as an indication of similarities between samples to correct for population structure (--similarity) and is also able to output _bugwas_ lineage effects (--lineage) using the same kinship matrix as before to estimate distances between samples (--distances). As I&#39;ve mentioned on the previous section, _pyseer_ output is tab delimited, so I had to modify _qqman_&#39;s _manhattan_ function in order to plot the results. What I basically did is modify the logic that loops through chromosomes in human driven GWAS and loop through conditions. Moreover, if there are similar conditions (i.e. increasing molarity of the same compound), the modified function plots these conditions on the same axes with different colors (see Results).
 
-**Results**
+## Results ##
 
-**       ** Although results were obtained with the _bugwas_ implementation, I didn&#39;t trust them much because I was using a continuous phenotype that was not being correctly tested with the association model used in _bugwas_. Because of this, the results were not interpretable.
+Although results were obtained with the _bugwas_ implementation, I didn&#39;t trust them much because I was using a continuous phenotype that was not being correctly tested with the association model used in _bugwas_. Because of this, the results were not interpretable.
 
 With the _pyseer_ implementation I obtained interpretable and coherent results. Only 2 of the more than 200 plots are shown on Figure 1 for illustration purposes.  On both conditions a significant common peak can be identified on the middle of the genome. Thus, we can say that this region of the genome has variants that affect growth under these conditions. Further analyses, like the ones performed on yeast (Zan &amp; Carlborg 2019), can be done in order to discern this possible GxGxE interactions.
 
-|
 
- |
-| --- |
+## Discussion ##
 
-
-
-**Discussion**
-
-        Although the results obtained through _pyseer_ were good enough to trust, there are still things that need to be addressed. The built pipeline uses SNPs as input for the genetic diversity in the population but as it&#39;s been mentioned on the introduction, an alignment-free k-mer counting is preferable due to the high variability of sequences present in the pangenome.
+Although the results obtained through _pyseer_ were good enough to trust, there are still things that need to be addressed. The built pipeline uses SNPs as input for the genetic diversity in the population but as it&#39;s been mentioned on the introduction, an alignment-free k-mer counting is preferable due to the high variability of sequences present in the pangenome.
 
 Moreover, _bugwas_ was implemented in a script fashion rather than in a pipeline like _pyseer_&#39;s case. Even though the current state of the script&#39;s documentation allows for proper understanding of the logic and processing, it would&#39;ve been better if it was fully implemented in a pipeline.
 
 
 
-**Self-assessment**
+## Self-assessment ##
 
-**       ** During this research training course, I&#39;ve had the opportunity to meet brilliant scientists and learn a lot from them, both academically and personally. From my perspective, this research training has been a perfect fit to replace my other courses. I&#39;ve had the experience of working with real data, real problems and learn the theory along the way. It&#39;s also reassuring to know that the work I&#39;ve been doing will have some use in the future.
+During this research training course, I&#39;ve had the opportunity to meet brilliant scientists and learn a lot from them, both academically and personally. From my perspective, this research training has been a perfect fit to replace my other courses. I&#39;ve had the experience of working with real data, real problems and learn the theory along the way. It&#39;s also reassuring to know that the work I&#39;ve been doing will have some use in the future.
 
 
 
-**Bibliography**
+## Bibliography ##
 
 Bradbury PJ, Zhang Z, Kroon DE, Casstevens TM, Ramdoss Y, Buckler ES. 2007. TASSEL: software for association mapping of complex traits in diverse samples. Bioinformatics 23: 2633–2635.
 
