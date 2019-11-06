@@ -35,7 +35,7 @@ The classic approach for variant calling is based on alignment of the reads agai
 
 ### Biological data ###
 
-The dataset used in this project is publicly available [https://evocellnet.github.io/ecoref/](Galardini _et al._ 2017). It consists of 696 _Escherichia coli_ strains phenotyped for 214 environments. The measured phenotype is growth. The authors provide phenotypic information and genotypic information that were used in my analyses. Other relevant information is also available for the dataset such as pangenome, phylogeny, conditions and strains.
+The dataset used in this project is publicly available [https://evocellnet.github.io/ecoref/] (Galardini _et al._ 2017). It consists of 696 _Escherichia coli_ strains phenotyped for 214 environments. The measured phenotype is growth. The authors provide phenotypic information and genotypic information that were used in my analyses. Other relevant information is also available for the dataset such as pangenome, phylogeny, conditions and strains.
 
 #### Software ####
 
