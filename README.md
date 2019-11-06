@@ -1,4 +1,4 @@
-<a href="https://ibb.co/25ZPyx3"><img src="https://i.ibb.co/M9Bpsrk/Medical-22.jpg" height="200" align="right" border="0"></a>
+<a href="https://ibb.co/25ZPyx3"><img src="https://i.ibb.co/M9Bpsrk/Medical-22.jpg" height="100" align="right" border="0"></a>
 
 
 ## Brief description of the course ##
