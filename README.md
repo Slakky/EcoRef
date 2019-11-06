@@ -1,4 +1,4 @@
-<a href="https://ibb.co/1YVtyTZ"><img src="https://i.ibb.co/KcZp4W6/v92-ju-ning-51-chemistry.jpg" align="right" border="0"></a>
+<a href="https://ibb.co/25ZPyx3"><img src="https://i.ibb.co/M9Bpsrk/Medical-22.jpg" align="right" border="0"></a>
 
 
 ## Brief description of the course ##
