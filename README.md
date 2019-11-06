@@ -53,13 +53,7 @@ With the _pyseer_ implementation I obtained interpretable and coherent results. 
 
 Although the results obtained through _pyseer_ were good enough to trust, there are still things that need to be addressed. The built pipeline uses SNPs as input for the genetic diversity in the population but as it&#39;s been mentioned on the introduction, an alignment-free k-mer counting is preferable due to the high variability of sequences present in the pangenome.
 
-Moreover, _bugwas_ was implemented in a script fashion rather than in a pipeline like _pyseer_&#39;s case. Even though the current state of the script&#39;s documentation allows for proper understanding of the logic and processing, it would&#39;ve been better if it was fully implemented in a pipeline.
-
-
-
-## Self-assessment ##
-
-During this research training course, I&#39;ve had the opportunity to meet brilliant scientists and learn a lot from them, both academically and personally. From my perspective, this research training has been a perfect fit to replace my other courses. I&#39;ve had the experience of working with real data, real problems and learn the theory along the way. It&#39;s also reassuring to know that the work I&#39;ve been doing will have some use in the future.
+Moreover, _bugwas_ was implemented in a script fashion rather than in a pipeline like _pyseer_&#39;s case. Even though the current state of the scripts documentation allows for proper understanding of the logic and processing, it would&#39;ve been better if it was fully implemented in a pipeline.
 
 
 
