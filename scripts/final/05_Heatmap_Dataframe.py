@@ -29,4 +29,4 @@ for condition in conditions:
 
 df = pd.DataFrame(d).transpose().apply(lambda x: -(np.log10(x)), axis = 1)
 
-df.to_csv('/home/claudio/nas/output/heatmap_dataframe.tsv', sep = '\t', index = False)
+df.to_csv('/home/claudio/nas/output/heatmap_dataframe.tsv', sep = '\t')
