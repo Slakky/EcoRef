@@ -1,19 +1,6 @@
 <a href="https://ibb.co/25ZPyx3"><img src="https://i.ibb.co/M9Bpsrk/Medical-22.jpg" height="90" align="right" border="0"></a>
 
 
-## Brief description of the course ##
-
-This research training course has been carried out in the section for Comparative genetics and functional genomics within the department for medical biochemistry and microbiology at Uppsala University. Specifically, in theresearch group for Computational genomics, lead by Prof. Örjan Carlborg. The course took place from the 1st of September to mid-November.
-
-The research at the Carlborg group is focused on the structure of the genotype-phenotype map in complex traits. This is done through the development of new bioinformatic tools and statistical methods to analyze the large amount of genetic information produced nowadays. Currently the group has two main lines of research, both of them focusing on the modifying effects epistasis and the environment have over variants associated with given phenotypes. One of these lines - and their ongoing project - focuses on gene by gene interactions (&#39;GxG&#39;), integrating both low coverage genome sequencing and evolutionary information. The other line aims to study gene by environment (&#39;GxE&#39; from now on) interactions. Using this approach, the team has been able to identify environmental effects on epistatic loci in yeast (Zan &amp; Carlborg 2019). These are gene by gene by environment interactions (&#39;GxGxE&#39; from now on).
-
-As a bioinformatics focused research laboratory, a common day at the Carlborg group revolves around the development of pipelines, analysis of data, evaluation of statistical methodologies, among others. We have a lunch break and a _fika_ break occasionally.
-
-Every Friday we have a group meeting where everyone explains what has been done over the week and shows any results that may have. On these group meetings I&#39;ve had the opportunity to learn more about what the team is doing in terms of scientific research and I&#39;ve also been able to learn new things about population genetics and genomics. Once a month there&#39;s a genomics section meeting where general administrative topics are discussed with all members of the department.
-
-As I&#39;ve mentioned before, the group has two main lines of research. The one I&#39;ve taken part of focuses on gene by gene by environment interactions. The group&#39;s idea is to do the same kind of analysis performed on yeast (Zan &amp; Carlborg 2019) on a bacterial dataset.  In order to identify GxGxE interactions on bacteria we need first to find genetic variants associated with the given phenotype. Once this is done, further interaction analyses can be performed on these variants. During this research training course, I&#39;ve done a literature research to look for available software to detect these variants and choose the most suitable program. In order to do so, I&#39;ve tested two different programs (see Methods section) on a public _Escherichia coli_ dataset (Galardini _et al._ 2017). I&#39;ve also built the starting pipeline implementing these programs for the analyses that may be carried out on other bacterial datasets. This will help the team on their future bacterial GxGxE project.
-
-
 
 ## Introduction ##
 
