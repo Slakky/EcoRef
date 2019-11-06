@@ -1,6 +1,4 @@
-<a>
-   <img src="https://www.vecteezy.com/free-vector/double-helix" align="right" height="60" />
-</a>
+<a href="https://ibb.co/1YVtyTZ"><img src="https://i.ibb.co/KcZp4W6/v92-ju-ning-51-chemistry.jpg" align="right" border="0"></a>
 
 
 ## Brief description of the course ##
