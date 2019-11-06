@@ -51,7 +51,7 @@ function (x, cond = "COND", chr = "CHR", bp = "BP", p = "P",
   if (nchr == 1) {
     d$pos = d$BP
     ticks = floor(length(d$pos))/2 + 1
-    xlabel = paste("Chromosome", unique(d$CHR), "position")
+    xlabel = paste("Genome position")
     labs = ticks
   }
   else {

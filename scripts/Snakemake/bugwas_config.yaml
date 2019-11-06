@@ -1,7 +1,6 @@
-input_dir:
-    /home/claudio/Comp_Genetics/input
+output_dir:
+  /home/claudio/nas/bugwas_output
 base_dir:
-    /home/claudio/Comp_Genetics
-phenotypes:
-    /home/claudio/Comp_Genetics/input/bugwas_phenotypes.tsv
-    
+  /home/claudio/nas
+phenotype_dir:
+  /home/claudio/nas/phenotypes
