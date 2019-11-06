@@ -1,4 +1,7 @@
-<a href="https://www.vecteezy.com/free-vector/double-helix"></a>
+<a>
+   <img src="https://www.vecteezy.com/free-vector/double-helix" align="right" height="60" />
+</a>
+
 
 ## Brief description of the course ##
 
