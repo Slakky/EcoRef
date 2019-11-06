@@ -1,3 +1,5 @@
+<a href="https://www.vecteezy.com/free-vector/double-helix"></a>
+
 ## Brief description of the course ##
 
 This research training course has been carried out in the section for Comparative genetics and functional genomics within the department for medical biochemistry and microbiology at Uppsala University. Specifically, in theresearch group for Computational genomics, lead by Prof. Örjan Carlborg. The course took place from the 1st of September to mid-November.
