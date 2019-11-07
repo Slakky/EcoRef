@@ -45,7 +45,7 @@ for (i in seq_along(cond.unique)){
     ## plots here
   tiff(paste(output,sprintf('%s.tiff', cond.unique[i])), units = "in", width = 5, height = 5, res = 300)
   colors <- alpha(c(brewer.pal(n = length(files), name = 'Dark2')), 0.5)
-  manhattan(df.plot, cex = 0.25, col = colors, genomewideline = F)
+  manhattan(df.plot, cex = 0.25, col = colors, suggestiveline = F)
   dev.off()
 }
 
