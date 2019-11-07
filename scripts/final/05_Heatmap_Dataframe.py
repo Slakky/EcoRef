@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as tkr
 from scipy.stats import binned_statistic
 
-bin_size = 1000
+bin_size = 100000
 
 df = pd.read_table('/home/claudio/nas/output/all_env.plot', sep = '\t')
 all_df = df.drop(df.columns[[1,2,5,6,7,8]], axis = 1)
