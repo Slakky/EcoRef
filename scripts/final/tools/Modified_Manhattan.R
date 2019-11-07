@@ -124,7 +124,7 @@ function (x, cond = "COND", chr = "CHR", bp = "BP", p = "P",
     warning("This functionality (several chr and env) is yet to be implemented")
   }
   legend("topleft", title = "Conditions", legend = unique(d$COND), 
-         col = col[1:ncond], pch = 20)
+         col = col[1:ncond], pch = 20, cex = 0.75)
   if (suggestiveline) 
     abline(h = suggestiveline, col = "blue")
   if (genomewideline) 
