@@ -43,7 +43,7 @@ for (i in seq_along(cond.unique)){
   names(df.plot) <- c(unlist(strsplit(headers.list[[1]], " ")), "COND")
   last.position <- nr.df + 1
     ## plots here
-  tiff(paste(output,sprintf('%s.tiff', cond.unique[i])), width = 1000, height = 1000, compression = "lzw", res = 300)
+  tiff(paste(output,sprintf('%s.tiff', cond.unique[i])), units = "in", width = 5, height = 5, res = 300)
   colors <- alpha(c(brewer.pal(n = length(files), name = 'Dark2')), 0.5)
   manhattan(df.plot, cex = 0.25, col = colors)
   dev.off()
