@@ -6,7 +6,7 @@ myBreaks <- c(1, 7, 20)
 # pvalues are log transformed
 tiff('/home/claudio/nas/heatmap.tiff', width = 3200, height = 3200, units = "px", res = 800, compression = "lzw")
 heatmap.2(as.matrix(df[,-1]), dendrogram = "none", 
-          Colv = FALSE, trace = "none", breaks = myBreaks, col = myCol, 
+          Colv = FALSE, Rowv = FALSE, trace = "none", breaks = myBreaks, col = myCol, 
           density.info="density",
           lmat = rbind(c(3,4), c(2,1)),
           key.par = list(cex=0.5),
