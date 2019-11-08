@@ -42,12 +42,6 @@ In order to run _bugwas_,a population phylogenetic tree has to be provided. As d
 
 The _pyseer_ implementation is more pipeline focused, defining rules and loops inside the pipeline. Hence, the processing is easier to follow and modify. The user has a _yaml_ config file where most tweakable parameters can be modified in addition to directories and other general best practices. _Pyseer_, although having more options and being more versatile than _bugwas,_ is more user-friendly, dealing with most of the formatting problems _bugwas_ has automatically.  The pipeline that is right now implemented is using a VCF file (--vcf) as input for genetic diversity in the samples, a linear mixed model for association (--lmm) that uses a kinship matrix as an indication of similarities between samples to correct for population structure (--similarity) and is also able to output _bugwas_ lineage effects (--lineage) using the same kinship matrix as before to estimate distances between samples (--distances). As I&#39;ve mentioned on the previous section, _pyseer_ output is tab delimited, so I had to modify _qqman_&#39;s _manhattan_ function in order to plot the results. What I basically did is modify the logic that loops through chromosomes in human driven GWAS and loop through conditions. Moreover, if there are similar conditions (i.e. increasing molarity of the same compound), the modified function plots these conditions on the same axes with different colors (see Results).
 
-## Results ##
-
-Although results were obtained with the _bugwas_ implementation, I didn&#39;t trust them much because I was using a continuous phenotype that was not being correctly tested with the association model used in _bugwas_. Because of this, the results were not interpretable.
-
-With the _pyseer_ implementation I obtained interpretable and coherent results. Only 2 of the more than 200 plots are shown on Figure 1 for illustration purposes.  On both conditions a significant common peak can be identified on the middle of the genome. Thus, we can say that this region of the genome has variants that affect growth under these conditions. Further analyses, like the ones performed on yeast (Zan &amp; Carlborg 2019), can be done in order to discern this possible GxGxE interactions.
-
 
 ## Discussion ##
 
